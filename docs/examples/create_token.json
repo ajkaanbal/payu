@@ -1,0 +1,15 @@
+{
+    "language": "es",
+    "command": "CREATE_TOKEN",
+    "merchant": {
+        "apiLogin": "11959c415b33d0c",
+        "apiKey": "6u39nqhq8ftd0hlvnjfs66eh8c"
+    },
+    "creditCardToken": {
+        "payerId": "10",
+        "name": "full name",
+        "paymentMethod": "VISA",
+        "number": "4111111111111111",
+        "expirationDate": "2015/01"
+    }
+}

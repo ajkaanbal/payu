@@ -1,0 +1,14 @@
+{
+    "language": "es",
+    "command": "GET_TOKENS",
+    "merchant": {
+        "apiLogin": "11959c415b33d0c",
+        "apiKey": "6u39nqhq8ftd0hlvnjfs66eh8c"
+    },
+    "creditCardTokenInformation": {
+        "payerId": "10",
+        "creditCardTokenId": "a6ab07a8-2bc6-4c39-9ad1-cc18d6d53bf8",
+        "startDate": "2014-01-15T15:30:00",
+        "endDate": "2015-01-16T17:40:00"
+    }
+}
