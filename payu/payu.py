@@ -3,42 +3,64 @@
 import json
 import requests
 
-PAYU_MERCHANT_ID = '500238'
-PAYU_ACCOUNT_ID = '1'
-PAYU_API_LOGIN = '11959c415b33d0c'
-PAYU_API_KEY = '6u39nqhq8ftd0hlvnjfs66eh8c'
-PAYU_PUBLIC_KEY = 'PK186ijn7a2R137B52ZHHm1P9P'
-PAYU_PAYMENTS_URL = 'https://stg.api.payulatam.com/payments-api/4.0/service.cgi'
-PAYU_REPORTS_URL = 'https://stg.api.payulatam.com/reports-api/4.0/service.cgi'
-PAYU_TOKENIZE_URL = 'http://api.payulatam.com/payments-api/4.0/service'
-PAYU_TEST = True
+#  PayU Testing data:
+MERCHANT_ID = '500238'
+ACCOUNT_ID = '500547'
+API_LOGIN = '11959c415b33d0c'
+API_KEY = '6u39nqhq8ftd0hlvnjfs66eh8c'
+PUBLIC_KEY = 'PK186ijn7a2R137B52ZHHm1P9P'
+PAYMENTS_URL = 'https://stg.api.payulatam.com/payments-api/4.0/service.cgi'
+REPORTS_URL = 'https://stg.api.payulatam.com/reports-api/4.0/service.cgi'
+TOKENIZE_URL = 'http://api.payulatam.com/payments-api/4.0/service'
+TEST = True
+REPORTS='reports'
+PAYMENTS='payments'
 
 
 class PayU(object):
-    def __init__(self):
+    def __init__(self, api_login='', api_key='', account_id=''):
         """ Datos de la cuenta de PayU necesarios para usar la API"""
 
-        self.api_login = PAYU_API_LOGIN
-        self.api_key = PAYU_API_KEY
-        self.payments_url = PAYU_PAYMENTS_URL
-        self.reports_url = PAYU_REPORTS_URL
-        self.test = PAYU_TEST
+        self.api_login = api_login if api_login else API_LOGIN
+        self.api_key = api_key if api_key else API_KEY
+        self.account_id = account_id  if account_id else ACCOUNT_ID
+        self.payments_url = PAYMENTS_URL
+        self.reports_url = REPORTS_URL
+        self.test = TEST
+
+        # Default data for every request
         self.payload = {
             'language': 'es',
-            'command': 'GET_TOKENS',
+            'command': 'PING',
             'merchant': {
                 'apiLogin': self.api_login,
                 'apiKey': self.api_key
-            }
+            },
+            'test': self.test
         }
 
-    def send_request(self, payload):
+        self.order = {
+            'language': 'es',
+            'accountId': self.account_id
+        }
+
+        self.transaction_data = {
+            'type': 'AUTHORIZATION_AND_CAPTURE',
+            'paymentCountry': 'MX',
+        }
+
+    def send_request(self, payload, api_type=PAYMENTS):
         headers = {
             'Content-type': 'application/json',
             'Accept': 'application/json'
         }
+
+        payu_url = self.payments_url
+        if api_type == REPORTS:
+            payu_url = self.reports_url
+
         response = requests.post(
-            self.payments_url,
+            payu_url,
             data=json.dumps(payload),
             headers=headers,
             verify=False
@@ -70,7 +92,6 @@ class PayU(object):
         response = self.send_request(payload)
         return json.loads(response.text)
 
-
     def get_tokens(self, payer_id, token_id):
         """ Información sobre el token """
 
@@ -90,4 +111,57 @@ class PayU(object):
 
         return json.loads(response.text)
 
+    def submit_transaction(self,
+                           token_id,
+                           reference_code,
+                           description,
+                           notify_url,
+                           value,
+                           email):
+
+        order = self.order.copy()
+
+        order.update({
+            'referenceCode': reference_code,
+            'description': description,
+            'signature': '2b241ad76d4e4eb37cf9113fa9aae8df',
+            'notifyUrl': notify_url,
+            'additionalValues': {
+                'TX_VALUE': {
+                    'value': value,
+                    'currency': 'MXN'
+                }
+            }
+        })
+
+        transaction = self.transaction_data.copy()
+        transaction.update({
+            'order': order,
+            'creditCardTokenId': token_id,
+            'payer':{
+                'emailAddress': email
+            }
+        })
+
+        payload = self.payload.copy()
+
+        payload.update({
+            'command': 'SUBMIT_TRANSACTION',
+            'transaction': transaction
+        })
+
+        response = self.send_request(payload)
+        return json.loads(response.text)
+
+    def order_detail(self, order_id):
+        payload = self.payload.copy()
+        payload.update({
+            'command': 'ORDER_DETAIL',
+            'details':{
+                'orderId': order_id
+            }
+        })
+
+        response = self.send_request(payload, api_type=REPORTS)
+        return json.loads(response.text)
 

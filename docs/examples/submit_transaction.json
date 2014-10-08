@@ -1,36 +1,31 @@
 {
-   "language": "es",
-   "command": "SUBMIT_TRANSACTION",
-   "merchant": {
-      "apiKey": "6u39nqhq8ftd0hlvnjfs66eh8c",
-      "apiLogin": "11959c415b33d0c"
-   },
-   "transaction": {
-      "order": {
-         "accountId": "500547",
-         "referenceCode": "payment_test_00000001",
-         "description": "payment test",
-         "language": "es",
-         "signature": "2b241ad76d4e4eb37cf9113fa9aae8df",
-         "notifyUrl": "http://www.tes.com/confirmation",
-         "additionalValues": {
-            "TX_VALUE": {
-               "value": 100,
-               "currency": "MXN"
+    "language": "es",
+    "command": "SUBMIT_TRANSACTION",
+    "merchant": {
+        "apiKey": "6u39nqhq8ftd0hlvnjfs66eh8c",
+        "apiLogin": "11959c415b33d0c"
+    },
+    "transaction": {
+        "order": {
+            "accountId": "500547",
+            "referenceCode": "payment_test_00000001",
+            "description": "payment test",
+            "language": "es",
+            "signature": "2b241ad76d4e4eb37cf9113fa9aae8df",
+            "notifyUrl": "http://www.tes.com/confirmation",
+            "additionalValues": {
+                "TX_VALUE": {
+                    "value": 100,
+                    "currency": "MXN"
+                }
             }
-         },
-         "buyer": {
-            "fullName": "First name and second buyer  name",
-            "emailAddress": "buyer_test@test.com",
-            "contactPhone": "7563126"
-         }
-      },
-     "creditCardTokenId": "a6ab07a8-2bc6-4c39-9ad1-cc18d6d53bf8",
-      "type": "AUTHORIZATION_AND_CAPTURE",
-      "paymentMethod": "VISA",
-      "paymentCountry": "MX",
-      "ipAddress": "127.0.0.1",
-      "userAgent": "Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0"
-   },
-   "test": true
+        },
+        "creditCardTokenId": "a6ab07a8-2bc6-4c39-9ad1-cc18d6d53bf8",
+        "type": "AUTHORIZATION_AND_CAPTURE",
+        "payer": {
+            "emailAddress": "test@payulatam.com"
+        },
+        "paymentCountry": "MX"
+    },
+    "test": true
 }

@@ -1,0 +1,12 @@
+{
+    "test": true,
+    "language": "es",
+    "command": "ORDER_DETAIL",
+    "merchant": {
+        "apiLogin": "11959c415b33d0c",
+        "apiKey": "6u39nqhq8ftd0hlvnjfs66eh8c"
+    },
+    "details": {
+        "orderId": 5920900
+    }
+}
