@@ -24,7 +24,7 @@ setup(
         open('README.rst').read() + '\n' +
         open('CHANGES.rst').read()
     ),
-    name='payu',
+    name='payup',
     packages=find_packages(),
     test_suite='payu.tests',
     tests_require=[
