@@ -1,5 +1,5 @@
+import re
 import unittest
-from payu import PayU
 
 
 class PayUTest(unittest.TestCase):
@@ -20,7 +20,10 @@ class PayUTest(unittest.TestCase):
         self.assertEqual(response.get('code'), 'SUCCESS')
 
     def test_get_tokens(self):
-        response = self.payu.get_tokens('10', 'a6ab07a8-2bc6-4c39-9ad1-cc18d6d53bf8')
+        response = self.payu.get_tokens(
+            '10',
+            'a6ab07a8-2bc6-4c39-9ad1-cc18d6d53bf8'
+        )
         self.assertTrue(response.get('code'))
         self.assertEqual(response.get('code'), 'SUCCESS')
 
@@ -41,7 +44,11 @@ class PayUTest(unittest.TestCase):
         transactionResponse = response.get('transactionResponse')
         self.assertEqual(response.get('code'), 'SUCCESS')
         self.assertTrue(transactionResponse.get('transactionId'))
-        self.assertRegexpMatches(transactionResponse.get('transactionId'), '[\W\d-]+')
+
+        self.assertTrue(re.search(
+            '[\W\d-]+',
+            transactionResponse.get('transactionId'))
+        )
 
     def test_order_detail(self):
         response = self.payu.order_detail(5920900)
