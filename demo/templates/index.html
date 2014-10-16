@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row">
+    <div class="large-12 columns">
+      Para mayor información consultar la información del sitio oficial <a href="http://desarrolladores.payulatam.com/" target="_blank">PayU</a>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="large-12 columns">
+      <h5>Datos de prueba:</h5>
+      <dl>
+        <dt> </dt>
+        <dd>
+          <pre>
+              ACCOUNT_ID='500547'
+              MERCHANT_ID='500238'
+              API_LOGIN='11959c415b33d0c'
+              API_KEY='6u39nqhq8ftd0hlvnjfs66eh8c'
+              PUBLIC_KEY='PKfm6N499761MiCW566M9okj0N'
+              PAYMENTS_URL='https://stg.api.payulatam.com/payments-api/4.0/service.cgi'
+              REPORTS_URL='https://stg.api.payulatam.com/reports-api/4.0/service.cgi'
+              TOKENIZE_URL='http://stg.api.payulatam.com/payments-api/4.0/service'
+              TEST=True
+              </pre>
+      </dd>
+    </dl>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="large-12 columns">
+    <ul>
+      <li><p><a href="/create-token">Registrar una tarjeta </a> </p></li>
+      <li><p><a href="/create-token-js">Registrar una tarjeta usando javascript</a></p></li>
+      <li><p><a href="/get-tokens">Obtener información de un token</a></p></li>
+    </ul>
+  </div>
+</div>
+<hr/>
+
+{% endblock %}

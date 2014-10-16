@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.4.4/css/foundation.min.css" type="text/css" media="screen" charset="utf-8">
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+  <link href='/static/css/styles.css' rel='stylesheet' type='text/css'>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="panel">
+        <h1>Pagos en línea con PayU</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-3 columns ">
+      <div class="panel">
+        <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+          <section class="section">
+            <h5 class="title"><a href="#">Section 1</a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="#">Section 2</a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="#">Section 3</a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="#">Section 4</a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="#">Section 5</a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="#">Section 6</a></h5>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="large-9 columns">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+  </div>
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr/>
+      <div class="row">
+        <div class="large-5 columns">
+          <p>© Copyright no one at all. Go to town.</p>
+        </div>
+      </div>
+    </footer>
+  {% block js %}{% endblock %}
+</body>
+</html>
